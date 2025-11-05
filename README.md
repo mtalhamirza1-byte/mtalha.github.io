@@ -176,11 +176,6 @@
       `;
       list.prepend(li);
     }
-
-    // (Optional) You can expand on currency selection here if needed
-    document.getElementById('currency').addEventListener('change', function() {
-      // You can trigger updated behaviors on currency change.
-    });
   </script>
 </body>
 </html>
