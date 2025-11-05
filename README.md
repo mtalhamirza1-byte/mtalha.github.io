@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +75,7 @@
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <div class="logo">🧺 LM</div>
+      <div class="logo">🧺 Bubble Wash</div>
       <button onclick="showTab('dashboard')">Dashboard</button>
       <button onclick="showTab('customers')">Customers</button>
       <button onclick="showTab('orders')">Orders</button>
