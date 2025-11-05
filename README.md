@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<index.html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,66 +9,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #f4f7fa; color: #333; }
 
-    /* ===== LAYOUT ===== */
-    .container { display: flex; height: 100vh; overflow: hidden; }
-    .sidebar {
-      width: 220px; background: linear-gradient(180deg, #4facfe, #00f2fe);
-      color: #fff; display: flex; flex-direction: column;
-      padding: 20px 10px; transition: all 0.3s ease;
-    }
-    .logo {
-      font-size: 22px; font-weight: bold; text-align: center;
-      margin-bottom: 30px; letter-spacing: 1px;
-    }
-    .sidebar button {
-      background: transparent; border: none; color: #fff;
-      padding: 12px; margin: 5px 0; text-align: left;
-      border-radius: 8px; font-size: 16px; cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s;
-    }
-    .sidebar button:hover {
-      background: rgba(255,255,255,0.2); transform: translateX(5px);
-    }
-
-    .main { flex: 1; padding: 20px; overflow-y: auto; }
-    h2 { margin-bottom: 15px; background: linear-gradient(90deg,#4facfe,#00f2fe);
-         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    /* ===== CARDS ===== */
-    .card {
-      background: #fff; border-radius: 12px; padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px;
-      transition: transform 0.2s;
-    }
-    .card:hover { transform: scale(1.02); }
-
-    /* ===== TABLES ===== */
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-    th { background: #4facfe; color: white; }
-    tr:nth-child(even) { background: #f9f9f9; }
-    tr:hover { background: #eefaff; }
-
-    /* ===== FORMS ===== */
-    form { display: flex; flex-wrap: wrap; gap: 10px; }
-    input, select {
-      flex: 1; padding: 10px; border: 1px solid #ccc;
-      border-radius: 8px; font-size: 14px;
-    }
-    button.submit-btn {
-      flex: 1; background: linear-gradient(90deg,#43e97b,#38f9d7);
-      color: white; border: none; padding: 12px;
-      border-radius: 8px; cursor: pointer; font-size: 15px;
-      transition: opacity 0.3s ease;
-    }
-    button.submit-btn:hover { opacity: 0.8; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .sidebar { width: 70px; }
-      .sidebar button { font-size: 12px; padding: 10px; text-align: center; }
-      .sidebar .logo { font-size: 14px; margin-bottom: 10px; }
-    }
+  
   </style>
 </head>
 <body>
@@ -82,74 +23,32 @@
       <button onclick="showTab('reports')">Reports</button>
       <button onclick="showTab('settings')">Settings</button>
     </div>
+<!-- Your HTML code here -->
+<div class="card">
+  <h2>Currency Selector</h2>
+  <label for="currency">Choose Currency:</label>
+  <select id="currency">
+    <option value="USD">USD</option>
+    <option value="PKR">PKR</option>
+    <option value="EUR">EUR</option>
+    <option value="GBP">GBP</option>
+  </select>
+  <p>Price: <span class="price" data-usd="5">5 USD</span></p>
+</div>
 
-    <!-- Main Content -->
-    <div class="main">
-      <!-- Dashboard -->
-      <div id="dashboard" class="tab card">
-        <h2>Dashboard</h2>
-        <p>Total Customers: <span id="totalCustomers">0</span></p>
-        <p>Total Orders: <span id="totalOrders">0</span></p>
-        <p>Total Revenue: $<span id="totalRevenue">0</span></p>
-        <p>Pending Balance: $<span id="pendingBalance">0</span></p>
-      </div>
+<div class="card">
+  <h2>Customer List</h2>
+  <table id="customerTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-      <!-- Customers -->
-      <div id="customers" class="tab card" style="display:none;">
-        <h2>Customers</h2>
-        <form onsubmit="addCustomer(event)">
-          <input type="text" id="custName" placeholder="Name" required>
-          <input type="text" id="custPhone" placeholder="Phone" required>
-          <input type="text" id="custAddress" placeholder="Address" required>
-          <button class="submit-btn" type="submit">Add Customer</button>
-        </form>
-        <table>
-          <thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Address</th></tr></thead>
-          <tbody id="customerTable"></tbody>
-        </table>
-      </div>
-
-      <!-- Orders -->
-      <div id="orders" class="tab card" style="display:none;">
-        <h2>Orders</h2>
-        <form onsubmit="addOrder(event)">
-          <select id="orderCustomer" required></select>
-          <select id="orderService" required></select>
-          <input type="number" id="orderQty" placeholder="Quantity" min="1" required>
-          <select id="orderStatus">
-            <option value="Unpaid">Unpaid</option>
-            <option value="Paid">Paid</option>
-          </select>
-          <button class="submit-btn" type="submit">Add Order</button>
-        </form>
-        <table>
-          <thead><tr><th>Voucher</th><th>Customer</th><th>Service</th><th>Qty</th><th>Total</th><th>Status</th></tr></thead>
-          <tbody id="orderTable"></tbody>
-        </table>
-      </div>
-
-      <!-- Reports -->
-      <div id="reports" class="tab card" style="display:none;">
-        <h2>Reports</h2>
-        <p>Weekly Revenue: $<span id="weeklyRev">0</span></p>
-        <p>Monthly Revenue: $<span id="monthlyRev">0</span></p>
-        <p>Yearly Revenue: $<span id="yearlyRev">0</span></p>
-      </div>
-
-      <!-- Settings -->
-      <div id="settings" class="tab card" style="display:none;">
-        <h2>Services</h2>
-        <form onsubmit="addService(event)">
-          <input type="text" id="serviceName" placeholder="Service Name" required>
-          <input type="number" id="servicePrice" placeholder="Price" required>
-          <button class="submit-btn" type="submit">Add Service</button>
-        </form>
-        <table>
-          <thead><tr><th>ID</th><th>Service</th><th>Price</th></tr></thead>
-          <tbody id="serviceTable"></tbody>
-        </table>
-      </div>
-    </div>
+  
   </div>
 
   <script>
